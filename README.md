@@ -9,15 +9,11 @@ The first module, **CodeZipper**, collects source files/folders and exports them
 
 ## Features
 
-- Cyberpunk UI theme with custom window chrome, glitch buttons, boot overlay, and dissolve page transitions.
 - **CodeZipper** module:
   - Add individual source files or entire folders.
   - Filters by common code extensions (`.cs`, `.xaml`, `.json`, `.md`, etc.).
   - Skips build/IDE folders like `bin`, `obj`, `.git`, `node_modules`, etc.
   - Generates a single PDF with line numbers, file paths, and page numbers.
-- MVVM architecture using `CommunityToolkit.Mvvm`.
-- PDF generation using [QuestPDF](https://www.questpdf.com/).
-- Portable publish support (self-contained / single-file).
 
 ## Tech Stack
 

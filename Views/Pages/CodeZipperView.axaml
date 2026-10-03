@@ -1,0 +1,195 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:DjangiToolbox.ViewModels.Pages"
+             xmlns:models="using:DjangiToolbox.Models"
+             x:Class="DjangiToolbox.Views.Pages.CodeZipperView"
+             x:DataType="vm:CodeZipperViewModel">
+
+    <Grid RowDefinitions="Auto,*,Auto,180" Margin="32,24">
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="4" Margin="0,0,0,20">
+            <TextBlock Text="CODEZIPPER" Classes="hero" FontSize="32"/>
+            <TextBlock Text="// zip source code into a single PDF"
+                       Classes="dim"/>
+        </StackPanel>
+
+        <!-- Sources panel -->
+        <Border Grid.Row="1" Classes="panel accent" Margin="0,0,0,16">
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <Grid Grid.Row="0" ColumnDefinitions="Auto,Auto,*,Auto"
+                      Margin="0,0,0,12">
+                    <Button Grid.Column="0"
+                            Content="+ ADD FILES"
+                            Classes="glitch"
+                            Command="{Binding AddFilesCommand}"
+                            Margin="0,0,8,0"/>
+                    <Button Grid.Column="1"
+                            Content="+ ADD FOLDER"
+                            Classes="glitch"
+                            Command="{Binding AddFolderCommand}"
+                            Margin="0,0,8,0"/>
+                    <Button Grid.Column="3"
+                            Content="CLEAR"
+                            Classes="glitch"
+                            Command="{Binding ClearAllCommand}"/>
+                </Grid>
+
+                <!-- File list -->
+                <Border Grid.Row="1"
+                        Background="#0A0E14"
+                        BorderBrush="{DynamicResource CyberBorder}"
+                        BorderThickness="1"
+                        MinHeight="180">
+                    <ListBox ItemsSource="{Binding Files}"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Padding="4">
+                        <ListBox.Styles>
+                            <Style Selector="ListBoxItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                            <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                                <Setter Property="Background" Value="#131A23"/>
+                            </Style>
+                            <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                                <Setter Property="Background" Value="#18222E"/>
+                            </Style>
+                        </ListBox.Styles>
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="models:FileEntry">
+                                <Grid ColumnDefinitions="*,Auto,Auto" Margin="10,6">
+                                    <TextBlock Grid.Column="0"
+                                               Text="{Binding Name}"
+                                               Foreground="{DynamicResource CyberCyan}"
+                                               FontSize="13"
+                                               VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"
+                                               ToolTip.Tip="{Binding Path}"/>
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding SizeDisplay}"
+                                               Classes="dim"
+                                               VerticalAlignment="Center"
+                                               Margin="12,0"
+                                               MinWidth="60"/>
+                                    <Button Grid.Column="2"
+                                            Content="✕"
+                                            Classes="icon glitch"
+                                            Width="28" Height="24"
+                                            Background="Transparent"
+                                            Foreground="{DynamicResource CyberRed}"
+                                            Command="{Binding $parent[UserControl].((vm:CodeZipperViewModel)DataContext).RemoveFileCommand}"
+                                            CommandParameter="{Binding}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+
+                <!-- Footer: count -->
+                <TextBlock Grid.Row="2"
+                           Text="{Binding FileCountText}"
+                           Classes="dim"
+                           Margin="4,10,0,0"/>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*, Auto" Margin="0,0,0,16">
+            <!-- Output row -->
+            <Border Grid.Column="0" Classes="panel">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <TextBlock Grid.Column="0"
+                               Text="OUTPUT"
+                               Foreground="{DynamicResource CyberYellow}"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="0,0,16,0"/>
+                    <TextBox Grid.Column="1"
+                             Text="{Binding OutputPath}"
+                             PlaceholderText="no output selected"
+                             Background="#0A0E14"
+                             Foreground="{DynamicResource CyberCyan}"
+                             BorderBrush="{DynamicResource CyberBorder}"
+                             BorderThickness="1"
+                             Padding="10,8"
+                             FontFamily="Consolas"
+                             VerticalAlignment="Center"/>
+                    <Button Grid.Column="2"
+                            Content="BROWSE"
+                            Classes="glitch"
+                            Command="{Binding PickOutputCommand}"
+                            Margin="12,0,0,0"/>
+                </Grid>
+            </Border>
+
+            <!-- Action bar -->
+            <Border Grid.Column="1" Classes="panel" Margin="12,0,0,0">
+                <Button Grid.Column="3"
+                    Content="▶ RUN"
+                    Classes="glitch"
+                    Command="{Binding RunCommand}"/>
+            </Border>
+        </Grid>
+        
+        <!-- ===== LOG PANEL ===== -->
+        <Border Grid.Row="4" Classes="panel" Padding="0">
+            <Grid RowDefinitions="Auto,*">
+
+                <Border Grid.Row="0"
+                        Background="#0A0E14"
+                        BorderBrush="{DynamicResource CyberBorder}"
+                        BorderThickness="0,0,0,1"
+                        Padding="12,8">
+                    <TextBlock Text="// OUTPUT LOG"
+                               Foreground="{DynamicResource CyberYellow}"
+                               FontSize="12"
+                               FontWeight="SemiBold"/>
+                </Border>
+
+                <ScrollViewer Grid.Row="1"
+                              Name="LogScroll"
+                              Background="#0A0E14"
+                              Padding="12,8"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Logs}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="models:LogEntry">
+                                <Border Classes="logRow">
+                                    <Grid ColumnDefinitions="Auto,Auto,*" Margin="0,2">
+                                        <TextBlock Grid.Column="0"
+                                                Text="{Binding TimeText}"
+                                                FontFamily="Consolas" FontSize="12"
+                                                Foreground="{DynamicResource CyberDim}"
+                                                Margin="0,0,10,0"/>
+                                        <TextBlock Grid.Column="1"
+                                                Text="{Binding Level}"
+                                                Classes.info="{Binding IsInfo}"
+                                                Classes.warn="{Binding IsWarn}"
+                                                Classes.error="{Binding IsError}"
+                                                FontFamily="Consolas" FontSize="12"
+                                                FontWeight="SemiBold"
+                                                MinWidth="52"
+                                                Margin="0,0,10,0"/>
+                                        <TextBlock Grid.Column="2"
+                                                Text="{Binding Message}"
+                                                FontFamily="Consolas" FontSize="12"
+                                                Foreground="{DynamicResource CyberCyan}"
+                                                TextWrapping="Wrap"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

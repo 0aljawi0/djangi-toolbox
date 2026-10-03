@@ -1,0 +1,300 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Styles.Resources>
+        <ResourceDictionary>
+            <!-- ===== Cyberpunk 2077 palette ===== -->
+            <SolidColorBrush x:Key="CyberYellow" Color="#FCE22A"/>
+            <SolidColorBrush x:Key="CyberCyan"   Color="#5EF2FA"/>
+            <SolidColorBrush x:Key="CyberRed"    Color="#FF003C"/>
+            <SolidColorBrush x:Key="CyberGreen"  Color="#3DFFA0"/>
+
+            <SolidColorBrush x:Key="CyberBg"     Color="#0A0E14"/>
+            <SolidColorBrush x:Key="CyberPanel"  Color="#10151C"/>
+            <SolidColorBrush x:Key="CyberBorder" Color="#1F2A36"/>
+            <SolidColorBrush x:Key="CyberDim"    Color="#8A99A8"/>
+
+            <FontFamily x:Key="CyberFont">avares://DjangiToolbox/Assets/Fonts#JetBrains Mono</FontFamily>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <!-- ============================================================ -->
+    <!--  BUTTONS                                                      -->
+    <!-- ============================================================ -->
+    <Style Selector="Button.icon">
+        <Setter Property="Padding"                    Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="FontSize"                   Value="14"/>
+    </Style>
+
+    <Style Selector="Button">
+        <Setter Property="Foreground"      Value="{DynamicResource CyberYellow}"/>
+        <Setter Property="Padding"         Value="22,10"/>
+        <Setter Property="FontFamily"      Value="{DynamicResource CyberFont}"/>
+        <Setter Property="FontWeight"      Value="SemiBold"/>
+        <Setter Property="FontSize"        Value="14"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <!-- Restyle the actual rendered rectangle of the button -->
+    <Style Selector="Button /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background"      Value="#0F141B"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource CyberYellow}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background"  Duration="0:0:0.15"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background"  Value="{DynamicResource CyberYellow}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CyberYellow}"/>
+        <Setter Property="Foreground"  Value="#0A0E14"/>
+    </Style>
+
+    <Style Selector="Button:pointerover">
+        <Setter Property="Foreground" Value="#0A0E14"/>
+        <Setter Property="Effect">
+            <DropShadowEffect Color="#FCE22A" BlurRadius="18" OffsetX="0" OffsetY="0" Opacity="0.75"/>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource CyberCyan}"/>
+    </Style>
+
+    <Style Selector="Button:pressed">
+        <Setter Property="Foreground" Value="#0A0E14"/>
+        <Setter Property="Effect">
+            <DropShadowEffect Color="#5EF2FA" BlurRadius="22" OffsetX="0" OffsetY="0" Opacity="0.9"/>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.close">
+        <Setter Property="Foreground" Value="{DynamicResource CyberRed}"/>
+    </Style>
+
+    <Style Selector="Button.close:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background"  Value="{DynamicResource CyberRed}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CyberRed}"/>
+        <Setter Property="Foreground"  Value="White"/>
+    </Style>
+
+    <Style Selector="Button.close:pointerover">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Effect">
+            <DropShadowEffect Color="#FF003C" BlurRadius="18" OffsetX="0" OffsetY="0" Opacity="0.85"/>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.active /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background"  Value="{DynamicResource CyberYellow}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CyberYellow}"/>
+        <Setter Property="Foreground"  Value="#0A0E14"/>
+    </Style>
+    
+    <Style Selector="Button.active">
+        <Setter Property="Foreground" Value="#0A0E14"/>
+    </Style>
+
+    <!-- ============================================================ -->
+    <!--  TEXT                                                         -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource CyberFont}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CyberCyan}"/>
+    </Style>
+
+    <Style Selector="TextBlock.hero">
+        <Setter Property="FontSize"   Value="42"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource CyberYellow}"/>
+    </Style>
+
+    <Style Selector="TextBlock.dim">
+        <Setter Property="FontSize"   Value="12"/>
+        <Setter Property="Foreground" Value="{DynamicResource CyberDim}"/>
+    </Style>
+
+    <!-- ============================================================ -->
+    <!--  PANELS (bordered containers)                                 -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.panel">
+        <Setter Property="Background"      Value="{DynamicResource CyberPanel}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource CyberBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding"         Value="16"/>
+    </Style>
+
+    <Style Selector="Border.accent">
+        <Setter Property="BorderBrush" Value="{DynamicResource CyberYellow}"/>
+    </Style>
+
+    <!-- Scrollbars: thin, cyan -->
+    <Style Selector="ScrollBar">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    <Style Selector="ScrollBar /template/ Thumb">
+        <Setter Property="Background" Value="#1F2A36"/>
+    </Style>
+    <Style Selector="ScrollBar:pointerover /template/ Thumb">
+        <Setter Property="Background" Value="{DynamicResource CyberCyan}"/>
+    </Style>
+
+    <!-- Log level colors -->
+    <Style Selector="TextBlock.info">
+        <Setter Property="Foreground" Value="{DynamicResource CyberCyan}"/>
+    </Style>
+    <Style Selector="TextBlock.warn">
+        <Setter Property="Foreground" Value="{DynamicResource CyberYellow}"/>
+    </Style>
+    <Style Selector="TextBlock.error">
+        <Setter Property="Foreground" Value="{DynamicResource CyberRed}"/>
+    </Style>
+
+
+    <!-- ============================================================
+    GLITCH BUTTON — layered ghosts + RGB split on hover
+    ============================================================ -->
+    <Style Selector="Button.glitch">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <!-- Cyan ghost -->
+                    <ContentPresenter Name="GhostCyan"
+                                      Content="{TemplateBinding Content}"
+                                      Foreground="{DynamicResource CyberCyan}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Padding="{TemplateBinding Padding}"
+                                      IsHitTestVisible="False"
+                                      Opacity="0"
+                                      ZIndex="0"/>
+
+                    <!-- Red ghost -->
+                    <ContentPresenter Name="GhostRed"
+                                      Content="{TemplateBinding Content}"
+                                      Foreground="{DynamicResource CyberRed}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Padding="{TemplateBinding Padding}"
+                                      IsHitTestVisible="False"
+                                      Opacity="0"
+                                      ZIndex="1"/>
+
+                    <!-- Real button surface -->
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      Background="{TemplateBinding Background}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      CornerRadius="{TemplateBinding CornerRadius}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Padding="{TemplateBinding Padding}"
+                                      ZIndex="2"/>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!-- Initial ghost state -->
+    <Style Selector="Button.glitch /template/ ContentPresenter#GhostCyan">
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="TranslateTransform.X" Value="0"/>
+    </Style>
+    <Style Selector="Button.glitch /template/ ContentPresenter#GhostRed">
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="TranslateTransform.X" Value="0"/>
+    </Style>
+
+    <!-- Cyan ghost animation on hover -->
+    <Style Selector="Button.glitch:pointerover /template/ ContentPresenter#GhostCyan">
+        <Style.Animations>
+            <Animation Duration="0:0:0.35" IterationCount="1">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0.9"/>
+                    <Setter Property="TranslateTransform.X" Value="-4"/>
+                </KeyFrame>
+                <KeyFrame Cue="18%">
+                    <Setter Property="TranslateTransform.X" Value="3"/>
+                </KeyFrame>
+                <KeyFrame Cue="34%">
+                    <Setter Property="TranslateTransform.X" Value="-2"/>
+                </KeyFrame>
+                <KeyFrame Cue="52%">
+                    <Setter Property="TranslateTransform.X" Value="2"/>
+                </KeyFrame>
+                <KeyFrame Cue="75%">
+                    <Setter Property="Opacity" Value="0.35"/>
+                    <Setter Property="TranslateTransform.X" Value="-1"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="TranslateTransform.X" Value="0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- Red ghost animation on hover (offset timing → slice feel) -->
+    <Style Selector="Button.glitch:pointerover /template/ ContentPresenter#GhostRed">
+        <Style.Animations>
+            <Animation Duration="0:0:0.35" IterationCount="1" Delay="0:0:0.04">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0.9"/>
+                    <Setter Property="TranslateTransform.X" Value="4"/>
+                </KeyFrame>
+                <KeyFrame Cue="15%">
+                    <Setter Property="TranslateTransform.X" Value="-3"/>
+                </KeyFrame>
+                <KeyFrame Cue="38%">
+                    <Setter Property="TranslateTransform.X" Value="2"/>
+                </KeyFrame>
+                <KeyFrame Cue="60%">
+                    <Setter Property="Opacity" Value="0.4"/>
+                    <Setter Property="TranslateTransform.X" Value="-1"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="TranslateTransform.X" Value="0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!-- PULSE -->
+    <Style Selector="Border.logRow">
+        <Setter Property="TranslateTransform.X" Value="0"/>
+        <Style.Animations>
+            <Animation Duration="0:0:0.55" IterationCount="1">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Setter Property="TranslateTransform.X" Value="-12"/>
+                </KeyFrame>
+                <KeyFrame Cue="35%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="TranslateTransform.X" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="55%">
+                    <Setter Property="Opacity" Value="0.55"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="TranslateTransform.X" Value="0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+</Styles>

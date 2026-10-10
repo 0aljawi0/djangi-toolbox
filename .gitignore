@@ -1,63 +1,24 @@
-# ---------------------------------------------------------
-# .NET / Avalonia / Rider / Visual Studio
-# ---------------------------------------------------------
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Build results
-[Bb]in/
-[Oo]bj/
-[Dd]ebug/
-[Rr]elease/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Oo]ut/
-[Ll]og/
-[Ll]ogs/
+node_modules
+dist
+dist-ssr
+*.local
 
-# Visual Studio
-.vs/
-*.rsuser
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-*.userprefs
-
-# Rider
-.idea/
-*.sln.iml
-
-# VS Code
-.vscode/
-
-# NuGet
-*.nupkg
-**/packages/*
-!**/packages/build/
-*.snupkg
-
-# .NET / MSBuild
-project.lock.json
-project.fragment.lock.json
-artifacts/
-*.binlog
-*.pdb
-*.dll
-*.exe
-
-# Publish output
-publish/
-*.publish/
-[Pp]ublish/
-
-# OS files
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
-Desktop.ini
-
-# User-specific files
-*.user
-*.cache
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

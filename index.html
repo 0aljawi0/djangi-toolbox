@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Djangi Toolbox</title>
+
+	<!-- 1) Theme bootstrap: MUST be before any stylesheet -->
+	<script>
+		(function () {
+			try {
+				var saved = localStorage.getItem("djangi.theme");
+				var isDark =
+					saved === "dark" ||
+					((!saved || saved === "system") &&
+						window.matchMedia("(prefers-color-scheme: dark)").matches);
+				var bg = isDark ? "#141218" : "#FEF7FF";
+				document.documentElement.classList.toggle("dark", isDark);
+				document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+				document.documentElement.style.background = bg;
+			} catch (_) {
+				document.documentElement.style.background = "#141218";
+			}
+		})();
+	</script>
+
+	<!-- 2) Pre-CSS paint guard: inline style beats everything -->
+	<style>
+		html,
+		body,
+		#root {
+			margin: 0;
+			height: 100%;
+			background: #141218;
+			/* dark fallback — matches Tauri window bg */
+		}
+
+		html:not(.dark) body,
+		html:not(.dark) #root {
+			background: #FEF7FF;
+			/* light fallback */
+		}
+
+		/* Hide anything before React mounts */
+		#root:empty::after {
+			content: "";
+			position: fixed;
+			inset: 0;
+			background: inherit;
+		}
+	</style>
+
+	<!-- Google fonts as before -->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+		rel="stylesheet" />
+</head>
+
+<body>
+	<div id="root"></div>
+	<script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

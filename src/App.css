@@ -1,0 +1,305 @@
+@import "tailwindcss";
+
+/* Enables `dark:` to respond to a `.dark` class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Tailwind theme tokens (bridge to MD3 CSS vars) ---------- */
+@theme inline {
+  --color-md-primary: var(--md-primary);
+  --color-md-on-primary: var(--md-on-primary);
+  --color-md-primary-container: var(--md-primary-container);
+  --color-md-on-primary-container: var(--md-on-primary-container);
+
+  --color-md-secondary: var(--md-secondary);
+  --color-md-on-secondary: var(--md-on-secondary);
+  --color-md-secondary-container: var(--md-secondary-container);
+  --color-md-on-secondary-container: var(--md-on-secondary-container);
+
+  --color-md-tertiary: var(--md-tertiary);
+  --color-md-tertiary-container: var(--md-tertiary-container);
+
+  --color-md-surface: var(--md-surface);
+  --color-md-surface-container: var(--md-surface-container);
+  --color-md-surface-container-high: var(--md-surface-container-high);
+  --color-md-on-surface: var(--md-on-surface);
+  --color-md-on-surface-variant: var(--md-on-surface-variant);
+  --color-md-outline: var(--md-outline);
+  --color-md-outline-variant: var(--md-outline-variant);
+
+  --color-md-error: var(--md-error);
+  --color-md-on-error: var(--md-on-error);
+
+  /* Elevation / shape */
+  --radius-md-xs: 4px;
+  --radius-md-sm: 8px;
+  --radius-md-md: 12px;
+  --radius-md-lg: 16px;
+  --radius-md-xl: 28px;
+
+  /* Animations */
+  --animate-ripple: ripple 0.6s cubic-bezier(0.2, 0, 0, 1);
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-boot-line: bootLine 0.4s cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-fade-up: fadeUp 0.5s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+/* -------------------- Material 3 baseline (light) -------------------- */
+:root {
+  --md-primary: #6750A4;
+  --md-on-primary: #FFFFFF;
+  --md-primary-container: #EADDFF;
+  --md-on-primary-container: #21005D;
+
+  --md-secondary: #625B71;
+  --md-on-secondary: #FFFFFF;
+  --md-secondary-container: #E8DEF8;
+  --md-on-secondary-container: #1D192B;
+
+  --md-tertiary: #7D5260;
+  --md-tertiary-container: #FFD8E4;
+
+  --md-surface: #FEF7FF;
+  --md-surface-container: #F3EDF7;
+  --md-surface-container-high: #ECE6F0;
+  --md-on-surface: #1D1B20;
+  --md-on-surface-variant: #49454F;
+  --md-outline: #79747E;
+  --md-outline-variant: #CAC4D0;
+
+  --md-error: #B3261E;
+  --md-on-error: #FFFFFF;
+
+  color-scheme: light;
+}
+
+/* -------------------- Material 3 baseline (dark) -------------------- */
+.dark {
+  --md-primary: #D0BCFF;
+  --md-on-primary: #381E72;
+  --md-primary-container: #4F378B;
+  --md-on-primary-container: #EADDFF;
+
+  --md-secondary: #CCC2DC;
+  --md-on-secondary: #332D41;
+  --md-secondary-container: #4A4458;
+  --md-on-secondary-container: #E8DEF8;
+
+  --md-tertiary: #EFB8C8;
+  --md-tertiary-container: #633B48;
+
+  --md-surface: #141218;
+  --md-surface-container: #211F26;
+  --md-surface-container-high: #2B2930;
+  --md-on-surface: #E6E0E9;
+  --md-on-surface-variant: #CAC4D0;
+  --md-outline: #938F99;
+  --md-outline-variant: #49454F;
+
+  --md-error: #F2B8B5;
+  --md-on-error: #601410;
+
+  color-scheme: dark;
+}
+
+/* -------------------- Base -------------------- */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  /* no scrollbars; the app manages its own layout */
+}
+
+/* -------------------- Keyframes -------------------- */
+@keyframes ripple {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.35;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(40);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes bootLine {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+    filter: blur(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Material elevation utilities (soft, MD3-flavoured) */
+@utility md-elev-1 {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.30), 0 1px 3px 1px rgb(0 0 0 / 0.15);
+}
+
+@utility md-elev-2 {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.30), 0 2px 6px 2px rgb(0 0 0 / 0.15);
+}
+
+@utility md-elev-3 {
+  box-shadow: 0 4px 8px 3px rgb(0 0 0 / 0.15), 0 1px 3px 0 rgb(0 0 0 / 0.30);
+}
+
+/* ---------- Ambient background blobs (Home hero) ---------- */
+@keyframes blob-a {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(60px, -50px, 0) scale(1.15);
+  }
+}
+
+@keyframes blob-b {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-70px, 40px, 0) scale(0.9);
+  }
+}
+
+@keyframes blob-c {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(40px, 60px, 0) scale(1.1);
+  }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.blob-a {
+  animation: blob-a 18s ease-in-out infinite;
+}
+
+.blob-b {
+  animation: blob-b 22s ease-in-out infinite;
+}
+
+.blob-c {
+  animation: blob-c 20s ease-in-out infinite;
+}
+
+.dark .blob {
+  opacity: 0.28;
+}
+
+/* ---------- Hero logo glow ring ---------- */
+@keyframes glowRing {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+}
+
+.hero-glow {
+  animation: glowRing 4s ease-in-out infinite;
+}
+
+/* ============ Liquid glass surface ============ */
+/* Applied to sidebar, titlebar, and any floating panel that overlays content. */
+@utility glass {
+  background-color: color-mix(in oklab, var(--md-surface-container) 55%, transparent);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  border-color: color-mix(in oklab, var(--md-outline-variant) 60%, transparent);
+}
+
+/* Slightly thicker variant for popovers / modals floating over content. */
+@utility glass-strong {
+  background-color: color-mix(in oklab, var(--md-surface-container) 78%, transparent);
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  border-color: color-mix(in oklab, var(--md-outline-variant) 70%, transparent);
+}
+
+/* Very subtle white film — this is what makes it read as *glass* and not just *blur*. */
+@utility glass-sheen {
+  position: relative;
+}
+@utility glass-sheen-before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.00) 40%,
+    rgba(0, 0, 0, 0.00) 60%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+}
+
+/* Dark mode: the sheen needs to be fainter, the tint slightly deeper. */
+.dark .glass {
+  background-color: color-mix(in oklab, var(--md-surface-container) 55%, transparent);
+}
+.dark .glass-strong {
+  background-color: color-mix(in oklab, var(--md-surface-container) 70%, transparent);
+}
